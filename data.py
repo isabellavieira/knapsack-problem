@@ -31,10 +31,9 @@ def parse_instance(instance_file):
         return knapsack_size, P, W, C
 
 def instance_iterator(instance_path):
-    file_iter = (f
-                for f in os.listdir(instance_path)
-                if f.startswith('Data') and f.endswith('.txt'))
-    for filename in file_iter:
+    file_list = [f for f in os.listdir(instance_path)
+                if f.startswith('Data') and f.endswith('.txt')]
+    for filename in sorted(file_list):
         path = os.path.join(instance_path, filename)
         k, P, W, C = parse_instance(path)
         yield (filename[5:-4], k, P, W, C)

@@ -3,11 +3,11 @@
 **Como rodar**
 
 ```
-trabalho <instance_path> <question>
+./trabalho <instance_path> <question>
 ```
 
 Exemplo:
 
 ```
-trabalho data 1
+./trabalho data 1
 ```

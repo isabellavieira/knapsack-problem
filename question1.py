@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import division
 
 import timeit
 
@@ -19,5 +20,18 @@ def solve(instance_path):
         print()
 
 def knapsack(k, P, W):
-    # TODO
-    return [(1,1)]
+    items = [(i, w, p / w) for i, (p, w) in enumerate(zip(P, W))]
+    items = iter(sorted(items, key=lambda t: t[2], reverse=True))
+
+    x = [0] * len(P)
+    weight = 0
+    while weight < k:
+        i, w, _ = next(items)
+        if weight + w <= k:
+            x[i] = 1
+            weight += w
+        else:
+            x[i] = (k - weight) / w
+            weight = k
+
+    return [ (i + 1, fract) for i, fract in enumerate(x) if fract > 0]
