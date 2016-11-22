@@ -50,11 +50,11 @@ def knapsack(k, P, W):
     # return m
 
 if __name__ == '__main__':
-    from data import parse_instance
-    k, P, W, C = parse_instance('data/Data-120-Q2.txt')
-    # k = 5
-    # P = [3,4,5,6]
-    # W = [2,3,4,5]
+    # from data import parse_instance
+    # k, P, W, C = parse_instance('data/Data-120-Q2.txt')
+    k = 5
+    P = [3,4,5,6]
+    W = [2,3,4,5]
     print(k)
     items = knapsack(k, P, W)
     print(items)

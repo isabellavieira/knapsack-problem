@@ -49,27 +49,3 @@ def print_solution(P, W, items_fractions):
     total_weight = sum(W[item - 1] * fract for item, fract in items_fractions)
     total_profit = sum(P[item - 1] * fract for item, fract in items_fractions)
     _print_solution(nb_items_used, total_weight, total_profit, items_fractions)
-
-if __name__ == '__main__':
-    # k, P, W, C = parse_instance(sys.argv[1])
-    # print('Knapsack size:', k)
-    # print('Profits:', len(P), P.count(0))
-    # print('Weights:', len(W), W.count(0))
-    # print('Conflicts:', len(C), C.count([]))
-    # for instance in instance_iterator(sys.argv[1]):
-    #     instance_name, k, P, W, C = instance
-    #     print('Instance file:', instance_name)
-    #     print('Knapsack size:', k)
-    #     print('Profits:', len(P), P.count(0))
-    #     print('Weights:', len(W), W.count(0))
-    #     print('Conflicts:', len(C), C.count([]))
-    #     print()
-    # 4 12 20
-    # 2 1
-    # 5 1
-    # 8 1
-    # 12 1
-    print('Internal')
-    _print_solution(4, 12, 20, [(5, 1), (2, 1), (12, 1), (8, 1)])
-    print('Common')
-    print_solution([5] * 12, [3] * 12, [(5, 1), (2, 1), (12, 1), (8, 1)])
