@@ -19,36 +19,38 @@ def solve(instance_path):
         print('Elapsed:', elapsed)
         print()
 
-# for i from 1 to n do:
-# 11     for j from 0 to W do:
-# 12         if w[i] > j then:
-# 13             m[i, j] := m[i-1, j]
-# 14         else:
-# 15             m[i, j] := max(m[i-1, j], m[i-1, j-w[i]] + v[i])
-
 def knapsack(k, P, W):
-    n = len(W)
-    m = np.zeros((n, k)) - 1
-    m[0,:] = 0
-    m[:,0] = 0
-    print(m)
+    n = len(W)+1
+    K = k+1
+    m = np.zeros((n, K))
     for i in range(1, n):
-        for j in range(k):
-            print(m)
-            if W[i] > j:
+        for j in range(1, K):
+            if W[i-1] > j:
                 m[i, j] = m[i - 1, j]
             else:
-                m[i, j] = max(m[i - 1, j], m[i - 1, j - W[i]] + P[i])
-    print(m)
+                m[i, j] = max(m[i - 1, j], P[i-1] + m[i - 1, j - W[i-1]])
 
-# http://pt.slideshare.net/JennyGalino/knapsack-problem-11648128
+    items = []
+    i, j = n - 1, K - 1
+    while j > 0:
+        p = m[i, j]
+        p_ = m[i - 1, j]
+        while p == p_ and i > 1:
+            i -= 1
+            p = m[i, j]
+            p_ = m[i - 1, j]
+        items.append((i, 1))
+        j -= W[i - 1]
+
+    return items
 
 if __name__ == '__main__':
     # from data import parse_instance
     # k, P, W, C = parse_instance('data/Data-120-Q1.txt')
-    k = 5
-    P = [3,4,5,6]
-    W = [2,3,4,5]
+    k = 7
+    P = [1,4,5,7]
+    W = [1,3,4,5]
     print(k)
     items = knapsack(k, P, W)
-    # print_solution(P, W, items)
+    print(items)
+    print_solution(P, W, items)
