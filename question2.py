@@ -17,6 +17,9 @@ def solve(instance_path):
 
         print_solution(P, W, items)
         print('Elapsed:', elapsed)
+        total = sum(W[item - 1] * fract for item, fract in items)
+        if total > k:
+            raise Exception("Erro no preenchimento da mochila.")
         print()
 
 def knapsack(k, P, W):
@@ -35,22 +38,26 @@ def knapsack(k, P, W):
     while j > 0:
         p = m[i, j]
         p_ = m[i - 1, j]
-        while p == p_ and i > 1:
+        while p == p_ and m[i,j] != 0:
             i -= 1
             p = m[i, j]
             p_ = m[i - 1, j]
-        items.append((i, 1))
         j -= W[i - 1]
+        if j >= 0:
+            items.append((i, 1))
 
     return items
+    # return m
 
 if __name__ == '__main__':
-    # from data import parse_instance
-    # k, P, W, C = parse_instance('data/Data-120-Q1.txt')
-    k = 7
-    P = [1,4,5,7]
-    W = [1,3,4,5]
+    from data import parse_instance
+    k, P, W, C = parse_instance('data/Data-120-Q2.txt')
+    # k = 5
+    # P = [3,4,5,6]
+    # W = [2,3,4,5]
     print(k)
     items = knapsack(k, P, W)
     print(items)
     print_solution(P, W, items)
+    # m = knapsack(k, P, W)
+    # print(m)
