@@ -51,14 +51,14 @@ def knapsack(k, P, W):
 
     return items, m[-1,-1]
 
-if __name__ == '__main__':
-    from data import parse_instance
-    k, P, W, C = parse_instance('data/Data-120-Q2.txt')
+# if __name__ == '__main__':
+#     from data import parse_instance
+#     k, P, W, C = parse_instance('data/Data-120-Q2.txt')
     # k = 7
     # P = [1,4,5,7]
     # W = [1,3,4,5]
-    print(k)
-    items, dp_profit = knapsack(k, P, W)
-    print("Valor total da matriz: ",dp_profit)
-    print(items)
-    print_solution(P, W, items)
+    # print(k)
+    # items, dp_profit = knapsack(k, P, W)
+    # # print("Valor total da matriz: ",dp_profit)
+    # print(items)
+    # print_solution(P, W, items)
