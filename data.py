@@ -14,7 +14,7 @@ def parse_instance(instance_file):
 
         P = [0] * nb_items
         W = [0] * nb_items
-        C = []
+        C = [set() for _ in range(10)]
 
         for line in lines[1:]:
             if not line:
@@ -22,11 +22,15 @@ def parse_instance(instance_file):
             index = int(line[0])
             profit = int(line[1])
             weight = int(line[2])
-            conflict_items = [int(i) for i in line[3:]]
+            conflict_items = {int(i) for i in line[3:]} #creating set
 
             P[index - 1] = profit
             W[index - 1] = weight
-            C.append(conflict_items)
+
+            for conflict in conflict_items:
+                C[conflict-1].add(index)
+
+            C[index-1].update([conflict_items])
 
         return knapsack_size, P, W, C
 
