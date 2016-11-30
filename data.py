@@ -6,15 +6,14 @@ import sys
 def parse_instance(instance_file):
     with open(instance_file) as f:
         text = f.readlines()
-
-        lines = [ t.strip().split() for t in text]
+        lines = [t.strip().split() for t in text]
 
         nb_items = int(lines[0][0])
         knapsack_size = int(lines[0][1])
 
         P = [0] * nb_items
         W = [0] * nb_items
-        C = [set() for _ in range(10)]
+        C = [set() for _ in range(nb_items)]
 
         for line in lines[1:]:
             if not line:
@@ -22,15 +21,16 @@ def parse_instance(instance_file):
             index = int(line[0])
             profit = int(line[1])
             weight = int(line[2])
-            conflict_items = {int(i) for i in line[3:]} #creating set
+            conflict_items = {int(i) - 1 for i in line[3:]} #esta
+            #pegando a lista de conflitos errada
 
             P[index - 1] = profit
             W[index - 1] = weight
 
             for conflict in conflict_items:
-                C[conflict-1].add(index)
+                C[conflict].add(index)
 
-            C[index-1].update([conflict_items])
+            C[index-1].update(conflict_items)
 
         return knapsack_size, P, W, C
 

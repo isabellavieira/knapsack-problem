@@ -23,14 +23,17 @@ def solve(instance_path):
         print()
 
 def knapsack(k, P, W, C):
-    items = [(i, w, p / w, c) for i, (p, w) in enumerate(zip(P, W, C))]
+    items = [(i, w, p / w, c) for i, (p, w, c) in enumerate(zip(P, W, C))]
     items = iter(sorted(items, key=lambda t: t[2], reverse=True))
 
     x = [0] * len(P)
     weight = 0
     conflicted_items = set()
     while weight < k:
-        i, w, _, c = next(items)
+        try:
+            i, w, _, c = next(items)
+        except StopIteration:
+            break
         if weight + w <= k and i not in conflicted_items:
             x[i] = 1
             weight += w
