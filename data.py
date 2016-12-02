@@ -21,16 +21,15 @@ def parse_instance(instance_file):
             index = int(line[0])
             profit = int(line[1])
             weight = int(line[2])
-            conflict_items = {int(i) - 1 for i in line[3:]} #esta
-            #pegando a lista de conflitos errada
+            conflict_items = {int(i) for i in line[3:]}
 
             P[index - 1] = profit
             W[index - 1] = weight
 
             for conflict in conflict_items:
-                C[conflict].add(index)
+                C[conflict-1].add(index)
 
-            C[index-1].update(conflict_items)
+            C[index - 1].update(conflict_items)
 
         return knapsack_size, P, W, C
 

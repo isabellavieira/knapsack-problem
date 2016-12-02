@@ -17,10 +17,9 @@ def solve(instance_path):
 
         print_solution(P, W, items)
         print('Elapsed:', elapsed)
-        print()
 
 def knapsack(k, P, W):
-    items = [(i, w, p / w) for i, (p, w) in enumerate(zip(P, W))]
+    items = [(i + 1, w, p / w) for i, (p, w) in enumerate(zip(P, W))]
     items = iter(sorted(items, key=lambda t: t[2], reverse=True))
 
     x = [0] * len(P)
@@ -28,10 +27,10 @@ def knapsack(k, P, W):
     while weight < k:
         i, w, _ = next(items)
         if weight + w <= k:
-            x[i] = 1
+            x[i - 1] = 1
             weight += w
         else:
-            x[i] = (k - weight) / w
+            x[i - 1] = (k - weight) / w
             weight = k
 
     return [ (i + 1, fract) for i, fract in enumerate(x) if fract > 0]

@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import division
 
 import timeit
 import numpy as np
@@ -20,10 +21,9 @@ def solve(instance_path):
         total_weight = sum(W[item - 1] * fract for item, fract in items)
         if total_weight > k:
             raise Exception("Erro no preenchimento da mochila.")
-        print()
 
 def knapsack(k, P, W, C):
-    items = [(i, w, p / w, c) for i, (p, w, c) in enumerate(zip(P, W, C))]
+    items = [(i + 1, w, p / w, c) for i, (p, w, c) in enumerate(zip(P, W, C))]
     items = iter(sorted(items, key=lambda t: t[2], reverse=True))
 
     x = [0] * len(P)
@@ -39,16 +39,16 @@ def knapsack(k, P, W, C):
             weight += w
             conflicted_items.update(c)
 
-    return [ (i + 1, fract) for i, fract in enumerate(x) if fract > 0]
+    return [ (i, fract) for i, fract in enumerate(x) if fract > 0]
 
-if __name__ == '__main__':
-    from data import parse_instance
-    k, P, W, C = parse_instance('data/Data-120-Q1.txt')
-    # k = 7
-    # P = [1,4,5,7]
-    # W = [1,3,4,5]
-    print(k)
-    items, dp_profit = knapsack(k, P, W, C)
-    # print("Valor total da matriz: ",dp_profit)
-    print(items)
-    print_solution(P, W, items)
+# if __name__ == '__main__':
+#     from data import parse_instance
+#     k, P, W, C = parse_instance('data/Data-120-Q1.txt')
+#     # k = 7
+#     # P = [1,4,5,7]
+#     # W = [1,3,4,5]
+#     print(k)
+#     items, dp_profit = knapsack(k, P, W, C)
+#     # print("Valor total da matriz: ",dp_profit)
+#     print(items)
+#     print_solution(P, W, items)
