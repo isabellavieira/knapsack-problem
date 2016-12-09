@@ -15,7 +15,7 @@ def solve(instance_path):
         items, dp_profit = knapsack(k, P, W)
         elapsed = timeit.default_timer() - start_time
 
-        print_solution(P, W, items)
+        print_solution(P, W, items, instance_name, 2)
         print('Elapsed:', elapsed)
         total_weight = sum(W[item - 1] * fract for item, fract in items)
         if total_weight > k:

@@ -15,7 +15,7 @@ def solve(instance_path):
         items = knapsack(k, P, W)
         elapsed = timeit.default_timer() - start_time
 
-        print_solution(P, W, items)
+        print_solution(P, W, items, instance_name, 1)
         print('Elapsed:', elapsed)
 
 def knapsack(k, P, W):
