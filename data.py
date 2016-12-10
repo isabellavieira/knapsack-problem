@@ -44,13 +44,13 @@ def instance_iterator(instance_path):
 def _print_solution(nb_items_used, total_weight, total_profit, items_fractions, instance_name, question):
 
 
-    if not os.path.exists("Output_Question" + str(question)):
+    if not os.path.exists("Output/Question" + str(question)):
         try:
-            os.makedirs("Output_Question" + str(question))
+            os.makedirs("Output/Question" + str(question))
         except OSError as exc: # Guard against race condition
                 raise
 
-    output = open((os.getcwd()+"/Output_Question"+str(question))+"/"+instance_name+".txt", "w")
+    output = open((os.getcwd()+"/Output/Question"+str(question))+"/"+"Data-"+instance_name+".txt", "w")
 
     #print('{} {} {}'.format(nb_items_used, total_weight, total_profit))
     output.write('{} {} {} \n'.format(nb_items_used, total_weight, total_profit))
